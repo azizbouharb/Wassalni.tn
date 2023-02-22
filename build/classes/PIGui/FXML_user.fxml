@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="403.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.FXML_userController">
+   <children>
+      <ImageView fitHeight="397.0" fitWidth="643.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../PIDev%20kdim/src/Create2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="221.0" layoutY="111.0" prefHeight="21.0" prefWidth="157.0" text="Nom">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="bt_Nom" layoutX="206.0" layoutY="139.0" />
+      <Label layoutX="212.0" layoutY="182.0" prefHeight="21.0" prefWidth="181.0" text="Cin">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="bt_Cin" layoutX="206.0" layoutY="203.0" />
+      <Label layoutX="206.0" layoutY="248.0" prefHeight="31.0" prefWidth="164.0" text="Email">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="bt_Email" layoutX="204.0" layoutY="279.0" />
+      <Label layoutX="203.0" layoutY="318.0" prefHeight="21.0" prefWidth="171.0" text="mot de passe">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="bt_confirm" layoutX="514.0" layoutY="295.0" mnemonicParsing="false" onAction="#ajouter_User" text="confirmer">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="bt_annuler" layoutX="522.0" layoutY="347.0" mnemonicParsing="false" onAction="#cancel_create" text="annuler">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <PasswordField fx:id="bt_pass" layoutX="206.0" layoutY="343.0" />
+      <Button fx:id="afficher" layoutX="514.0" layoutY="248.0" mnemonicParsing="false"  prefHeight="31.0" prefWidth="90.0" text="Afficher" />
+   </children>
+</AnchorPane>
