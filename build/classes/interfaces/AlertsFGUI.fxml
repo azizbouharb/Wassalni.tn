@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="brand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.controller.AlertsController">
+   <children>
+      <ScrollPane layoutY="40.0" prefHeight="660.0" prefWidth="1000.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="665.0" prefWidth="1000.0">
+               <children>
+                  <Label layoutX="379.0" layoutY="38.0" prefHeight="44.0" prefWidth="245.0" text="Envoyez une alerte" textFill="#111111">
+                     <font>
+                        <Font name="Tahoma Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="localisation" layoutX="223.0" layoutY="262.0" prefHeight="30.0" prefWidth="540.0" promptText="destination" style="-fx-border-color: #00FF00;" styleClass="form-control" stylesheets="@../../../css/tooplate-style.css" />
+                  <TextField fx:id="mail" layoutX="223.0" layoutY="170.0" prefHeight="30.0" prefWidth="540.0" promptText="Email" style="-fx-border-color: #00FF00;" styleClass="form-control" stylesheets="@../../../css/tooplate-style.css" />
+                  <TextArea fx:id="rapport" layoutX="223.0" layoutY="421.0" prefHeight="62.0" prefWidth="540.0" promptText="Rapport" style="-fx-border-color: #00FF00;" />
+                  <Label layoutX="233.0" layoutY="87.0" prefHeight="25.0" prefWidth="526.0" text="Ici, vous pouvez nous envoyer une alerte si quelque chose s'est mal passé ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="414.0" layoutY="112.0" prefHeight="25.0" prefWidth="162.0" text="durant le programme.">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="envoyeralert" layoutX="233.0" layoutY="512.0" mnemonicParsing="false" onAction="#envoyeralert" prefHeight="44.0" prefWidth="136.0" style="-fx-background-color: #4dc47d;" text="Envoyer" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="telephone" layoutX="223.0" layoutY="217.0" prefHeight="30.0" prefWidth="540.0" promptText="telephon" style="-fx-border-color: #00FF00;" styleClass="form-control" stylesheets="@../../../css/tooplate-style.css" />
+                  <DatePicker fx:id="date" layoutX="224.0" layoutY="369.0" prefHeight="30.0" prefWidth="539.0" promptText="datee" style="-fx-border-color: #00FF00;" />
+                  <ComboBox fx:id="programme_id" layoutX="224.0" layoutY="316.0" prefHeight="30.0" prefWidth="539.0" promptText="programmes" style="-fx-border-color: #00FF00;" />
+                  <Pane fx:id="pane_m" layoutX="868.0" layoutY="38.0" prefHeight="85.0" prefWidth="104.0" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 7, 0, 0, 0);" visible="false">
+                     <children>
+                        <VBox prefHeight="78.0" prefWidth="104.0">
+                           <children>
+                              <Button fx:id="to_profile" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: transparent;" text="Profile" />
+                              <Separator prefHeight="1.0" prefWidth="66.0" />
+                              <Button fx:id="to_panier" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: transparent;" text="Panier" />
+                              <Separator layoutX="10.0" layoutY="35.0" prefWidth="200.0" />
+                              <Button layoutX="10.0" layoutY="38.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: transparent;" text="Deconnection" />
+                              <Separator layoutX="10.0" layoutY="63.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Label fx:id="Annonces" layoutX="97.0" layoutY="165.0" prefHeight="44.0" prefWidth="79.0" style="-fx-font-family: Source Sans Pro;" text="Annonces" textFill="#f9f9f9">
+                     <font>
+                        <Font name="Tahoma" size="14.0" />
+                     </font>
+                  </Label>
+                <AnchorPane layoutX="6.0" layoutY="133.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                  <Button fx:id="Alert" layoutX="675.0" layoutY="512.0" mnemonicParsing="false" onAction="#to_alert" prefHeight="44.0" prefWidth="137.0" style="-fx-background-color: #4dc47d;" text="Voir Alerte" textFill="#eeebeb">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <Pane layoutY="-1.0" prefHeight="78.0" prefWidth="1000.0" style="-fx-background-color: #4dc47d; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 7, 0, 0, 0);">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="810.0" layoutY="1.0" prefHeight="44.0" prefWidth="170.0" />
+            <HBox alignment="CENTER_LEFT" layoutX="251.0" layoutY="1.0" prefHeight="78.0" prefWidth="750.0">
+               <children>
+                  <Button fx:id="Annonce" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: transparent;" text="Annonce" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Locaux" mnemonicParsing="false" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label prefHeight="44.0" prefWidth="82.0" style="-fx-font-family: Source Sans Pro;" text="Localisation" textFill="WHITE">
+                     <font>
+                        <Font name="Tahoma" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="137.0">
+                     <children>
+                        <Button fx:id="to_menu" mnemonicParsing="false" prefHeight="38.0" prefWidth="33.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets top="4.0" />
+                           </HBox.margin>
+                           <graphic>
+                           </graphic>
+                        </Button>
+                        <Label prefHeight="44.0" prefWidth="75.0" style="-fx-font-family: Source Sans Pro;" text="Evenements" textFill="WHITE">
+                           <font>
+                              <Font name="Tahoma" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="Propositions" prefHeight="44.0" prefWidth="81.0" style="-fx-font-family: Source Sans Pro;" text="Livraison" textFill="WHITE">
+                     <font>
+                        <Font name="Tahoma" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Button fx:id="Accueil" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="86.0" style="-fx-background-color: transparent;" />
+            <ImageView fitHeight="184.0" fitWidth="187.0" layoutX="-30.0" layoutY="-36.0">
+               <image>
+                  <Image url="@../../../../../Downloads/Wassalni-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
