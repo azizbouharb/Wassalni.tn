@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.FXML_VoitureController">
+   <children>
+      <ImageView fitHeight="426.0" fitWidth="600.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Create2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="152.0" layoutY="96.0" prefHeight="18.0" prefWidth="147.0" text="Matricule Voiture">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tf_mat" editable="false" layoutX="149.0" layoutY="122.0" />
+      <Label layoutX="150.0" layoutY="158.0" prefHeight="18.0" prefWidth="147.0" text="Image Carte Grise">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="222.0" prefHeight="18.0" prefWidth="147.0" text="Image Voiture">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="upload1" layoutX="149.0" layoutY="187.0" mnemonicParsing="false" onAction="#FileChooser1" text="Upload" />
+      <Button fx:id="upload2" layoutX="149.0" layoutY="248.0" mnemonicParsing="false" onAction="#FileChooser2" text="Upload" />
+      <Button fx:id="btnconfirmer" layoutX="204.0" layoutY="307.0" mnemonicParsing="false" onAction="#ajouter_Voiture" text="Confirmer" />
+      <Button fx:id="btnannuler" layoutX="299.0" layoutY="307.0" mnemonicParsing="false" text="Annuler" />
+      <TextField fx:id="tfgrise" editable="false" layoutX="208.0" layoutY="187.0" />
+      <TextField fx:id="tfvoi" editable="false" layoutX="208.0" layoutY="248.0" />
+      <TextField fx:id="nom" editable="false" layoutX="328.0" layoutY="71.0" prefHeight="26.0" prefWidth="108.0" />
+   </children>
+</AnchorPane>

@@ -18,25 +18,29 @@ public class Chauffeur extends User{
     private int permis_chauf;
     private String image_permis;
    
-    private int id_voiture;
+    private String id_voiture;
 
     public Chauffeur() {
     }
-    
-    
 
-    public Chauffeur(int permis_chauf, String image_permis, int id_voiture, int id_client, String nom_client, int cin_client, String email_client, String pass_client) {
-        super(id_client, nom_client, cin_client, email_client, pass_client);
+    public Chauffeur(int permis_chauf, String image_permis, String id_voiture, String nom_client, String email_client, String pass_client) {
+        super(nom_client, email_client, pass_client);
         this.permis_chauf = permis_chauf;
         this.image_permis = image_permis;
         this.id_voiture = id_voiture;
     }
 
-    public Chauffeur(int permis_chauf, String image_permis, int id_voiture, String nom_client, int cin_client, String email_client, String pass_client) {
-        super(nom_client, cin_client, email_client, pass_client);
+    public Chauffeur(int permis_chauf, String image_permis, String id_voiture, int id_client, String nom_client, String email_client, String pass_client) {
+        super(id_client, nom_client, email_client, pass_client);
         this.permis_chauf = permis_chauf;
         this.image_permis = image_permis;
         this.id_voiture = id_voiture;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
     }
 
     public int getPermis_chauf() {
@@ -55,84 +59,60 @@ public class Chauffeur extends User{
         this.image_permis = image_permis;
     }
 
-    public int getId_voiture() {
+    public String getId_voiture() {
         return id_voiture;
     }
 
-    public void setId_voiture(int id_voiture) {
+    public void setId_voiture(String id_voiture) {
         this.id_voiture = id_voiture;
     }
-    
-       public int getId_client() {
+
+    public int getId_client() {
         return id_client;
-    }
-
-    public String getNom_client() {
-        return nom_client;
-    }
-
-    
-
-    public int getCin_client() {
-        return cin_client;
-    }
-
-    public String getEmail_client() {
-        return email_client;
-    }
-
-   
-   
-    @Override
-    public String getPass_client() {
-        return pass_client;
-    }
-
-    @Override
-    public int getRole_client() {
-        return role_client;
     }
 
     public void setId_client(int id_client) {
         this.id_client = id_client;
     }
 
+    public String getNom_client() {
+        return nom_client;
+    }
+
     public void setNom_client(String nom_client) {
         this.nom_client = nom_client;
     }
 
-   
+    public int getCin_client() {
+        return cin_client;
+    }
 
-    @Override
     public void setCin_client(int cin_client) {
         this.cin_client = cin_client;
     }
 
-    @Override
+    public String getEmail_client() {
+        return email_client;
+    }
+
     public void setEmail_client(String email_client) {
         this.email_client = email_client;
     }
 
-    
+    public String getPass_client() {
+        return pass_client;
+    }
 
     public void setPass_client(String pass_client) {
         this.pass_client = pass_client;
     }
 
-    @Override
+    public int getRole_client() {
+        return role_client;
+    }
+
     public void setRole_client(int role_client) {
         this.role_client = role_client;
-    }
-
-    @Override
-    public String toString() {
-        return "Chauffeur{" + "permis_chauf=" + permis_chauf + ", image_permis=" + image_permis + ", id_voiture=" + id_voiture + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
     }
 
     @Override
@@ -150,20 +130,24 @@ public class Chauffeur extends User{
         if (this.permis_chauf != other.permis_chauf) {
             return false;
         }
-        if (this.id_voiture != other.id_voiture) {
+        if (!Objects.equals(this.image_permis, other.image_permis)) {
             return false;
         }
-        if (!Objects.equals(this.image_permis, other.image_permis)) {
+        if (!Objects.equals(this.id_voiture, other.id_voiture)) {
             return false;
         }
         return true;
     }
+
+    
     
       
     public int compare(Chauffeur o1, Chauffeur o2)
     {
         return o1.getNom_client().compareTo(o2.getNom_client());
     }
+
+   
     
     
     

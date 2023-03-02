@@ -35,6 +35,19 @@ public class User {
         this.role_client = role_client;
     }
 
+    public User(String nom_client, String email_client, String pass_client) {
+        this.nom_client = nom_client;
+        this.email_client = email_client;
+        this.pass_client = pass_client;
+    }
+
+    public User(int id_client, String nom_client, String email_client, String pass_client) {
+        this.id_client = id_client;
+        this.nom_client = nom_client;
+        this.email_client = email_client;
+        this.pass_client = pass_client;
+    }
+
     public User(int id_client, String nom_client, int cin_client, String email_client, String pass_client) {
         this.id_client = id_client;
         this.nom_client = nom_client;
@@ -134,10 +147,7 @@ public class User {
         return true;
     }
 
-    @Override
 
-    public String toString() {
-        return "User{" + "id_client=" + id_client + ", nom_client=" + nom_client + ", cin_client=" + cin_client + ", email_client=" + email_client + ", pass_client=" + pass_client + ", role_client=" + role_client + '}';
-    }
+    
 
 }

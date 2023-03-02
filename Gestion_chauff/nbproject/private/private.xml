@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/PIGui/ProfilCoachController.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>89</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIServices/Iservice.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIUtils/MyConnection.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIGui/FXML_VoitureController.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIGui/AcceuilController.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/Main.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIGui/Modifier_profilController.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/Pi/FXMain.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIGui/GestionController.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIGui/Profil_chaufController.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIClass/Chauffeur.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIGui/FXML_ChauffeurController.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIClass/User.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIServices/ServiceVoiture.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIGui/FXML_Voiture.fxml</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIClass/Voiture.java</file>
+            <file>file:/C:/Users/Aziz%20Bouharb/Desktop/PIDev%20kdim/src/PIServices/ServiceChauffeur.java</file>
+        </group>
+    </open-files>
+</project-private>

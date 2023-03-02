@@ -6,6 +6,7 @@
 package PIServices;
 
 import PIClass.Chauffeur;
+import PIClass.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.Comparator;
@@ -42,7 +43,7 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
             PreparedStatement pst = cn.prepareStatement(req);
             pst.setString(1, t.getNom_client());
             pst.setString(2, t.getImage_permis());
-            pst.setInt(3, t.getId_voiture());
+            pst.setString(3, t.getId_voiture());
 
             pst.setString(4, t.getEmail_client());
             pst.setString(5, t.getPass_client());
@@ -78,7 +79,7 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
             PreparedStatement pst = cn.prepareStatement(req);
           pst.setString(1, t.getNom_client());
             pst.setString(2, t.getImage_permis());
-            pst.setInt(3, t.getId_voiture());
+            pst.setString(3, t.getId_voiture());
 
             pst.setString(4, t.getEmail_client());
             pst.setString(5, t.getPass_client());
@@ -98,14 +99,14 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
     {
         List<Chauffeur> list = new ArrayList<>();
         
-        String requete = "SELECT * FROM chauffeurs";
+        String requete = "SELECT permis_chauf,nom_client,email_client,image_permis,pass_client,matricule_voiture FROM chauffeurs";
         try {
             
             PreparedStatement pst = 
                     new MyConnection().cn.prepareStatement(requete);
             ResultSet rs = pst.executeQuery(requete);
             while (rs.next()) {
-                list.add(new Chauffeur(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7))); 
+                list.add(new Chauffeur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),  rs.getString(5), rs.getString(6))); 
             }
             
         } catch(SQLException ex) {
@@ -129,7 +130,7 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
                 c.setId_client(rs.getInt("id_client"));
                 c.setNom_client(rs.getString("nom_client"));
                c.setImage_permis(rs.getString("image_permis"));
-                c.setId_voiture(rs.getInt("id_voiture"));
+                c.setId_voiture(rs.getString("id_voiture"));
                 c.setEmail_client(rs.getString("email_client"));
                 c.setPass_client(rs.getString("pass_client"));
                 c.setPermis_chauf(rs.getInt("permis_chauf"));
@@ -172,7 +173,7 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
                c.setId_client(rs.getInt("id_client"));
                 c.setNom_client(rs.getString("nom_client"));
                c.setImage_permis(rs.getString("image_permis"));
-                c.setId_voiture(rs.getInt("id_voiture"));
+                c.setId_voiture(rs.getString("id_voiture"));
                 c.setEmail_client(rs.getString("email_client"));
                 c.setPass_client(rs.getString("pass_client"));
                 c.setPermis_chauf(rs.getInt("permis_chauf"));
@@ -207,7 +208,7 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
                c.setId_client(rs.getInt("id_client"));
                 c.setNom_client(rs.getString("nom_client"));
                c.setImage_permis(rs.getString("image_permis"));
-                c.setId_voiture(rs.getInt("id_voiture"));
+                c.setId_voiture(rs.getString("matricule_voiture"));
                 c.setEmail_client(rs.getString("email_client"));
                 c.setPass_client(rs.getString("pass_client"));
                 c.setPermis_chauf(rs.getInt("permis_chauf"));
@@ -238,7 +239,7 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
 		String hashedPassword = "";
 		
         try {
-            String requete = "SELECT password FROM chauffeurs where email_client=?";
+            String requete = "SELECT pass_client FROM chauffeurs where email_client=?";
             PreparedStatement pst = cn.prepareStatement(requete);
 			pst.setString(1, inputEmail);
             ResultSet rs = pst.executeQuery();
@@ -246,7 +247,7 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
 				hashedPassword = rs.getString("pass_client");
             }
 			
-			if(BCrypt.checkpw(inputPassword, hashedPassword)) {
+			if((inputPassword.equals(hashedPassword))) {
 				System.out.println("It matches");
 				requete = "SELECT * FROM chauffeurs where email_client=?";
 				pst = cn.prepareStatement(requete);
@@ -256,7 +257,7 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
 					account.setId_client(rs.getInt("id_client"));
                 account.setNom_client(rs.getString("nom_client"));
                account.setImage_permis(rs.getString("image_permis"));
-                account.setId_voiture(rs.getInt("id_voiture"));
+                account.setId_voiture(rs.getString("matricule_voiture"));
                 account.setEmail_client(rs.getString("email_client"));
                 account.setPass_client(rs.getString("pass_client"));
                 account.setPermis_chauf(rs.getInt("permis_chauf"));
@@ -274,6 +275,58 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
 		
 		return account;
 	}
+      
+      
+      public boolean isUserAdmin( String inputEmail) {
+          
+          		User account = new User();
+                                    String email;
+                                    int role_u = 1;
+
+                        try {
+            String requete = "SELECT email_client,role_client FROM users where email_client=?";
+            PreparedStatement pst = cn.prepareStatement(requete);
+			pst.setString(1, inputEmail);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+				email = rs.getString("email_client");
+                                role_u  =rs.getInt("role_client");
+            }
+			
+			
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    int ADMIN_ROLE = 0;
+    return ADMIN_ROLE == role_u;
+}
+      
+            public String Getpass( String inputEmail) {
+          
+          		Chauffeur account = new Chauffeur();
+                                    String email;
+                                    String pass = null;
+                                  
+try {
+            String requete = "SELECT pass_client FROM chauffeurs where email_client=?";
+            PreparedStatement pst = cn.prepareStatement(requete);
+			pst.setString(1, inputEmail);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+				pass = rs.getString("pass_client");
+                                System.out.println(pass);
+            }
+			
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    
+    return pass;
+}
      
      public static ServiceChauffeur getInstance(){
             if(instance==null) 
@@ -281,4 +334,22 @@ public class ServiceChauffeur implements Iservice<Chauffeur>{
             return instance;
         }
     
+     
+     
+     
+     public void modifier_Pass(String email,String pass) {
+  try {
+            String req = "UPDATE chauffeurs SET pass_client=?  WHERE email_client=?";
+            PreparedStatement pst = cn.prepareStatement(req);
+          pst.setString(1, pass);
+            pst.setString(2, email);
+           
+            pst.executeUpdate();
+            System.out.println("Mot de Passe modifié !");
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="594.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.GestionController">
+   <children>
+      <TableView fx:id="tab" layoutY="4.0" prefHeight="590.0" prefWidth="548.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="46.399964332580566" text="Id" />
+          <TableColumn fx:id="nom" prefWidth="68.79998397827148" text="Nom" />
+            <TableColumn fx:id="img" prefWidth="81.5999755859375" text="Img_Permis" />
+            <TableColumn fx:id="mat" prefWidth="69.59999084472656" text="Matricule" />
+            <TableColumn fx:id="mail" prefWidth="69.59999084472656" text="E_mail" />
+            <TableColumn fx:id="pass" prefWidth="69.59999084472656" text="Password" />
+            <TableColumn fx:id="permis" prefWidth="69.59999084472656" text="Permis" />
+        </columns>
+      </TableView>
+      <Button fx:id="supp" layoutX="548.0" layoutY="92.0" mnemonicParsing="false" text="Supprimer" />
+   </children>
+</AnchorPane>
