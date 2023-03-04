@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1265.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.AfficherLocationGuiController">
+   <children>
+      <BorderPane layoutX="-3.0" layoutY="-4.0" prefHeight="894.0" prefWidth="1272.0">
+         <top>
+            <HBox prefHeight="78.0" prefWidth="1191.0" style="-fx-background-color: #163235;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="88.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Desktop/Pidev/sprint%201/src/Icons/Capture.PNG" />
+                     </image>
+                  </ImageView>
+                  <Pane prefHeight="80.0" prefWidth="1129.0">
+                     <children>
+                        <Text fill="#a1adae" layoutX="408.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reserver votre location">
+                           <font>
+                              <Font size="31.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </top>
+         <right>
+            <VBox prefHeight="755.0" prefWidth="138.0" style="-fx-background-color: #445b5d;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="249.0" fitWidth="164.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Desktop/Pidev/sprint%201/src/Icons/Affiche.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </right>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView fx:id="tv" layoutX="567.0" layoutY="441.0" prefHeight="310.0" prefWidth="511.0" style="-fx-border-radius: 8; -fx-padding: 3; -fx-position-shape: 10;">
+                    <columns>
+                        <TableColumn fx:id="colId_voiture" prefWidth="34.0" text="id de la voiture" />
+                      <TableColumn fx:id="colMatricule" prefWidth="88.0" text="Matricule" />
+                      <TableColumn fx:id="colModele" prefWidth="188.0" text="Modele" />
+                        <TableColumn fx:id="colPrix_jour" prefWidth="94.0" text="prix d un jour" />
+                    </columns>
+                  </TableView>
+                  <Text fill="#163235" layoutX="630.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des voitures disponniles">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="14.0" layoutY="378.0" prefHeight="373.0" prefWidth="550.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 0);">
+                     <children>
+                        <Label layoutX="12.0" layoutY="14.0" text="veuiller choisir la voiture dont vous voulez reserver en la selectionnant du tableau" textFill="#163235">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="rechercher" layoutX="64.0" layoutY="48.0" mnemonicParsing="false" onAction="#filter" style="-fx-background-color: #163235;" text="Rechercher" textFill="WHITE" />
+                        <TextField fx:id="txtRechercher" layoutX="163.0" layoutY="48.0" promptText="Rechercher" text="Rechercher le modele" />
+                        <Label fx:id="label_modele" layoutX="64.0" layoutY="99.0" prefHeight="17.0" prefWidth="173.0" textFill="#00ab1f" />
+                        <Text fill="#163235" layoutX="14.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modele" />
+                        <Text fill="#163235" layoutX="246.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricule" wrappingWidth="57.541015625" />
+                        <Label fx:id="label_matricule" layoutX="307.0" layoutY="99.0" prefHeight="17.0" prefWidth="173.0" textFill="#00ab1f" />
+                        <Text fill="#163235" layoutX="12.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date debut" />
+                        <Text fill="#163235" layoutX="283.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin" />
+                        <Text fill="#163235" layoutX="126.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="63.306640625" />
+                        <DatePicker fx:id="PickerDate_debut" layoutX="86.0" layoutY="169.0" />
+                        <DatePicker fx:id="PickerDate_fin" layoutX="325.0" layoutY="169.0" />
+                        <Label fx:id="label_prix" layoutX="178.0" layoutY="246.0" prefHeight="17.0" prefWidth="164.0" textFill="#1400f2" />
+                        <Label fx:id="label_date1" layoutX="12.0" layoutY="207.0" prefHeight="17.0" prefWidth="261.0" textFill="RED" />
+                        <Label fx:id="label_date2" layoutX="304.0" layoutY="207.0" prefHeight="17.0" prefWidth="211.0" textFill="RED" />
+                        <Button fx:id="Modifier" layoutX="222.0" layoutY="294.0" mnemonicParsing="false" onAction="#modifierLocation" prefHeight="29.0" prefWidth="76.0" style="-fx-background-color: #163235;" text="Modifier" textFill="WHITE" />
+                     </children>
+                  </Pane>
+                  <Button fx:id="GoToAjouter" layoutX="978.0" layoutY="122.0" mnemonicParsing="false" onAction="#GoToAjouter" prefHeight="29.0" prefWidth="76.0" style="-fx-background-color: #445b5d;" text="Ajouter" textFill="WHITE" />
+                  <TableView fx:id="tv1" layoutX="98.0" layoutY="48.0" prefHeight="296.0" prefWidth="831.0" style="-fx-border-radius: 8; -fx-padding: 3; -fx-position-shape: 10;">
+                     <columns>
+                        <TableColumn fx:id="colId_location" prefWidth="34.0" text="id de la voiture" />
+                        <TableColumn fx:id="colDate1" prefWidth="118.0" text="Date debut" />
+                        <TableColumn fx:id="colDate2" prefWidth="158.0" text="Date fin" />
+                        <TableColumn fx:id="colPrix_location" prefWidth="94.0" text="prix" />
+                        <TableColumn fx:id="colMatricule1" prefWidth="94.0" text="matricule" />
+                        <TableColumn fx:id="colModele1" prefWidth="151.0" text="modele" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="Supprimer" layoutX="978.0" layoutY="214.0" mnemonicParsing="false" onAction="#deleteLocation" prefHeight="29.0" prefWidth="76.0" style="-fx-background-color: #445b5d;" text="Supprimer" textFill="WHITE" />
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
