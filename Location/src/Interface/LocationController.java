@@ -35,6 +35,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
@@ -93,8 +94,6 @@ public class LocationController implements Initializable {
     @FXML
     private DatePicker txtDate_debut;
     @FXML
-    private ImageView ImageModele;
-    @FXML
     private GridPane gridPane;
    @FXML
 private ScrollPane scrollPane;
@@ -120,13 +119,22 @@ private int selectedCarPrix;
     private Label label_date1;
     @FXML
     private Label label_date2;
+    @FXML
+    private TextField txtRechercher;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // ...
+        txtRechercher.textProperty().addListener((observable, oldValue, newValue) -> {
+    updateDisplayedCars(newValue);
+});
+        
+
+        
+        
+        
 
         // Get all Voiture_location objects from the database
 // Get all Voiture_location objects from the database
@@ -180,6 +188,7 @@ voiturePane.add(selectButton, 0, 3);
 }
 
 
+
 // Set the HBox as the content of the ScrollPane
 scrollPane.setContent(voitureHBox);
 
@@ -194,6 +203,64 @@ scrollPane.setContent(voitureHBox);
         
         // TODO
     }
+    private void updateDisplayedCars(String modele) {
+    // Get all Voiture_location objects from the database
+    List<Voiture_location> voitureList = sl1.afficher();
+
+    // Create a new HBox to hold the filtered GridPanes
+    HBox filteredVoitureHBox = new HBox();
+    filteredVoitureHBox.setSpacing(10);
+
+    // Loop through each Voiture_location object
+    for (Voiture_location voiture : voitureList) {
+        // If the modele matches the user input, add the GridPane to the filtered HBox
+        if (voiture.getModele().toLowerCase().contains(modele.toLowerCase())) {
+            GridPane voiturePane = createVoiturePane(voiture);
+            filteredVoitureHBox.getChildren().add(voiturePane);
+            if (filteredVoitureHBox.getChildren().size() != 1) {
+                filteredVoitureHBox.getChildren().add(new Separator(Orientation.VERTICAL));
+            }
+        }
+    }
+
+    // Set the filtered HBox as the content of the ScrollPane
+    scrollPane.setContent(filteredVoitureHBox);
+}
+    private GridPane createVoiturePane(Voiture_location voiture) {
+    GridPane voiturePane = new GridPane();
+    voiturePane.setAlignment(Pos.CENTER);
+    voiturePane.setHgap(10);
+    voiturePane.setVgap(10);
+
+    // Create label to display modele and prix_jour
+    Label modelePrixLabel = new Label(voiture.getModele() + " - " + voiture.getPrix_jour() + " DT/jour");
+    modelePrixLabel.setAlignment(Pos.BOTTOM_CENTER);
+
+    // Create image view to display image_voiture
+    ImageView voitureImage = voiture.getImage_voiture();
+    voitureImage.setFitHeight(150);
+    voitureImage.setFitWidth(150);
+
+    // Add label and image view to grid pane
+    voiturePane.add(voitureImage, 0, 0);
+    voiturePane.add(new Separator(), 0, 1);
+    voiturePane.add(modelePrixLabel, 0, 2);
+
+    // Create a button to select the car
+    Button selectButton = new Button("Choisir");
+    selectButton.setStyle("-fx-background-color: #4dc47d;");
+    selectButton.setOnAction(e -> {
+        selectedCarId = voiture.getId_voiture();
+        selectedCarPrix = voiture.getPrix_jour();
+    });
+
+    // Add the select button to the grid pane
+    voiturePane.add(selectButton, 0, 3);
+
+    return voiturePane;
+}
+
+
     private void updatePriceLabel() {
     LocalDate debut = txtDate_debut.getValue();
     LocalDate fin = txtDate_fin.getValue();

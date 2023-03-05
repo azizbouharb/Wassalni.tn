@@ -134,27 +134,39 @@ public void modifier(Voiture_location voiture) {
 }
 
 //////////////////////////////////////////////////////////
-   public Voiture_location rechercher(String modele) {
-    Voiture_location voiture = null;
+  public List<Voiture_location> rechercher(String modele) {
+    List<Voiture_location> voitures = new ArrayList<>();
     try {
         String requete = "SELECT * FROM voiture_location WHERE modele LIKE ?";
         PreparedStatement st1 = cnx.prepareStatement(requete);
         st1.setString(1, "%" + modele + "%");
         ResultSet rs = st1.executeQuery();
 
-        if (rs.next()) {
-            voiture = new Voiture_location();
-            voiture.setId_voiture(rs.getInt("id_voiture"));
-            voiture.setMatricule(rs.getString("matricule"));
-            voiture.setModele(rs.getString("modele"));
-            voiture.setCarte_grise(rs.getString("carte_grise"));
-            voiture.setPrix_jour(rs.getInt("prix_jour"));
+        while (rs.next()) {
+            Voiture_location voiture = new Voiture_location();
+            voiture.setId_voiture(rs.getInt(1));
+            voiture.setMatricule(rs.getString(2));
+            voiture.setModele(rs.getString(3));
+            voiture.setCarte_grise(rs.getString(4));
+            voiture.setPrix_jour(rs.getInt(5));
+
+            // Get the image from the result set
+            Blob blob = rs.getBlob(6);
+            if (blob != null) {
+                InputStream is = blob.getBinaryStream();
+                Image image = new Image(is);
+                voiture.setImage_voiture(new ImageView(image));
+            }
+            voitures.add(voiture);
         }
     } catch (SQLException ex) {
         System.err.println(ex.getMessage());
     }
-    return voiture;
+    return voitures;
 }
+
+
+
 
     
 
