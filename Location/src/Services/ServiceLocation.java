@@ -114,15 +114,20 @@ public void modifier(Location a) {
         // Update the rental data in the "location" table
         String req = "UPDATE location "
                    + "INNER JOIN voiture_location ON location.id_voiture = voiture_location.id_voiture "
-                   + "SET location.date_debut = '"+a.getDate_debut()+"', "
-                   + "location.date_fin = '"+a.getDate_fin()+"', "
-                   + "location.prix_location = '"+prix_location+"', "
-                   + "location.id_voiture = '"+a.getId_voiture()+"', "
+                   + "SET location.date_debut = ?, "
+                   + "location.date_fin = ?, "
+                   + "location.prix_location = ?, "
+                   + "location.id_voiture = ?, "
                    + "location.matricule = voiture_location.matricule, "
-                   + "location.modele = voiture_location.modele "
-                    + "location.modele = voiture_location.image_voiture"
-                   + "WHERE location.id_location = "+a.getId_location();
+                   + "location.modele = voiture_location.modele, "
+                   + "location.image_voiture = voiture_location.image_voiture "
+                   + "WHERE location.id_location = ?";
         PreparedStatement st1 = cnx.prepareStatement(req);
+        st1.setString(1, a.getDate_debut());
+        st1.setString(2, a.getDate_fin());
+        st1.setInt(3, prix_location);
+        st1.setInt(4, a.getId_voiture());
+        st1.setInt(5, a.getId_location());
         st1.executeUpdate();
         System.out.println("Location modifié");
     } catch (SQLException ex) {
@@ -130,6 +135,7 @@ public void modifier(Location a) {
         System.out.println(ex.getMessage());
     }
 }
+
 
 
 
@@ -155,35 +161,36 @@ public void modifier(Location a) {
         
         
           List<Location> list = new ArrayList<>();
-      
     try {
-        String requete = "SELECT * FROM location ORDER BY date_debut";
-       PreparedStatement st1 = cnx.prepareStatement(requete);
-        ResultSet rs = st1.executeQuery(requete);
-        
+        String requete = "SELECT * FROM location";
+        ste = cnx.prepareStatement(requete);
+        ResultSet rs = ste.executeQuery();
         while (rs.next()) {
-           Location a = new Location();
-           a.setId_location(rs.getInt("id_location"));
-            a.setDate_debut(rs.getString("date_debut"));
-            a.setDate_fin(rs.getString("date_fin"));
-            a.setPrix_location(rs.getInt("prix_location"));
-            a.setId_voiture(rs.getInt("id_voiture"));
-             a.setMatricule(rs.getString("matricule"));
-              a.setModele(rs.getString("modele"));
-              Blob blob = rs.getBlob("image_voiture");
+            Location v = new Location();
+            v.setId_location(rs.getInt(1));
+            v.setDate_debut(rs.getString(2));
+            v.setDate_fin(rs.getString(3));
+            v.setPrix_location(rs.getInt(4));
+            v.setId_voiture(rs.getInt(5));
+            
+            v.setMatricule(rs.getString(6));
+            v.setModele(rs.getString(7));
+            
+            
+            // yekhou l image ml base
+            Blob blob = rs.getBlob(8);
             if (blob != null) {
                 InputStream is = blob.getBinaryStream();
                 Image image = new Image(is);
-                a.setImage_voiture(new ImageView(image));
+                v.setImage_voiture(new ImageView(image));
             }
-         
-            System.out.println(a.getId_location());
-            list.add(a);           
+
+            list.add(v);
         }
     } catch (SQLException ex) {
-        System.err.println(ex.getMessage());
+        System.out.println(ex.getMessage());
     }
-        return list;
+    return list;
       }
     
   

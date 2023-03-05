@@ -22,7 +22,7 @@ public class NewFXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception{
-      Parent root = FXMLLoader.load(getClass().getResource("Interface/Location.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("Interface/ModifierLocation.fxml"));
       primaryStage.setTitle("Location");
       primaryStage.setScene(new Scene(root, 1000,700));
       primaryStage.show();
@@ -37,3 +37,4 @@ public class NewFXMain extends Application {
     }
     
 }
+

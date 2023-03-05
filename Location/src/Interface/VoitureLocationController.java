@@ -7,6 +7,9 @@ package Interface;
 
 import Entities.Voiture_location;
 import Services.ServiceVoiture;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -63,6 +66,15 @@ import javax.swing.JOptionPane;
  * @author bahar
  */
 public class VoitureLocationController implements Initializable {
+    
+     private static final String ACCOUNT_SID = "AC2b31d2375146f65bcb7502fd6718e49a";
+    private static final String AUTH_TOKEN = "bc40c1ad62f044b8fc6ee85353e0cba0";
+
+    // The Twilio phone number you want to use to send SMS messages
+    private static final String TWILIO_NUMBER = "+15673131649";
+
+    // The recipient phone number you want to send an SMS message to
+    private static final String RECIPIENT_NUMBER = "+21653802106";
      Connection cnx;
     PreparedStatement ste;
     ServiceVoiture sl1= new ServiceVoiture();
@@ -230,6 +242,7 @@ TV.setOnMousePressed(new EventHandler<MouseEvent>() {
                 txtPrix.setText(Integer.toString(voiture.getPrix_jour()));
             
                 ImageVoiture.setImage(voiture.getImage_voiture().getImage());
+                
             }
         }
     }
@@ -357,6 +370,17 @@ private void Ajouter_voiture(ActionEvent event) {
         alert.setHeaderText(null);
         alert.setContentText("La voiture a été ajoutée avec succès.");
         alert.showAndWait();
+         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+        // Send an SMS message using the Twilio API
+        Message message = Message.creator(
+            new PhoneNumber(RECIPIENT_NUMBER),
+            new PhoneNumber(TWILIO_NUMBER),
+            "Voiture de location ajoutée!"
+        ).create();
+
+        // Print the message SID to the console
+        System.out.println("SMS message sent with SID: " + message.getSid());
     }
   
 

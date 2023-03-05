@@ -9,6 +9,9 @@ import Entities.Location;
 import Entities.Voiture_location;
 import Services.ServiceLocation;
 import Services.ServiceVoiture;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Blob;
@@ -47,12 +50,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javax.swing.JOptionPane;
 
+
 /**
  * FXML Controller class
  *
  * @author bahar
  */
 public class LocationController implements Initializable {
+    
 
     Connection cnx;
     PreparedStatement ste;
@@ -105,7 +110,15 @@ private int selectedCarPrix;
 
 
 
-  
+
+  private static final String ACCOUNT_SID = "AC2b31d2375146f65bcb7502fd6718e49a";
+    private static final String AUTH_TOKEN = "bc40c1ad62f044b8fc6ee85353e0cba0";
+
+    // The Twilio phone number you want to use to send SMS messages
+    private static final String TWILIO_NUMBER = "+15673131649";
+
+    // The recipient phone number you want to send an SMS message to
+    private static final String RECIPIENT_NUMBER = "+21653802106";
 
     
     ServiceLocation sl= new ServiceLocation();
@@ -259,6 +272,8 @@ scrollPane.setContent(voitureHBox);
 
     return voiturePane;
 }
+    
+    
 
 
     private void updatePriceLabel() {
@@ -282,6 +297,8 @@ scrollPane.setContent(voitureHBox);
         }
     }
 
+      
+    
     @FXML
 private void addLocation(ActionEvent event) {
     LocalDate debut = txtDate_debut.getValue();
@@ -331,7 +348,19 @@ private void addLocation(ActionEvent event) {
     ServiceLocation sc = new ServiceLocation();
     sc.ajouter(c);
     JOptionPane.showMessageDialog(null, "Ajout effectué avec succès.");
-}
+     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+        // Send an SMS message using the Twilio API
+        Message message = Message.creator(
+            new PhoneNumber(RECIPIENT_NUMBER),
+            new PhoneNumber(TWILIO_NUMBER),
+            "Reservation Confirmée!"
+        ).create();
+
+        // Print the message SID to the console
+        System.out.println("SMS message sent with SID: " + message.getSid());
+    }
+
 
     @FXML
     private void load(ActionEvent event) {

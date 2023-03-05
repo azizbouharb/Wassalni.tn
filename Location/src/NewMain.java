@@ -20,12 +20,12 @@ public class NewMain {
      public static void main(String[] args) {
         
         
-        Location l = new Location("2023-01-21", "2023-02-28", 24);
+        Location l = new Location(47,"2023-01-21", "2023-02-28", 28);
        
         ServiceLocation Service1 = new ServiceLocation();
-       System.out.println( Service1.ajouter(l));
+       //System.out.println( Service1.ajouter(l));
         //Service1.supprimer(l);
-        //Service1.modifier(l);
+        Service1.modifier(l);
        //System.out.println(Service1.afficher());
        
        //Voiture_location v = new Voiture_location("98TUN1060","peugeot 106","1438",54);
