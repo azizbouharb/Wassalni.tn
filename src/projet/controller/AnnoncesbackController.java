@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -42,7 +43,13 @@ import javax.swing.JOptionPane;
 import projet.entities.Annonces;
 import projet.service.ServiceAnnonce;
 
+
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.DatePicker;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 /**
  * FXML Controller class
@@ -85,39 +92,23 @@ public class AnnoncesbackController implements Initializable {
     private TableColumn<Annonces, Integer> coldispo;
     @FXML
     private TableColumn<Annonces, Integer> colnum;
-    @FXML
-    private Label e_nom;
-    @FXML
-    private TextField txtdate;
-    @FXML
-    private Label e_mail;
-    @FXML
+    private DatePicker txtdate;
     private TextField txtdestination;
-    @FXML
-    private Label e_password;
-    @FXML
     private TextField txtdepart;
-    @FXML
-    private Label e_telephone;
-    @FXML
     private TextField txtdispo;
-    @FXML
-    private Label e_prenom;
-    @FXML
-    private Button btnSupp;
-    @FXML
-    private Button btnmod;
-    @FXML
-    private Button btnajout;
-    @FXML
     private TextField txtnum;
     @FXML
     private TableColumn<?, ?> client;
+   
    
 
     /**
      * Initializes the controller class.
      */
+    
+    
+     
+    
     
     ServiceAnnonce sl= new ServiceAnnonce();
           List <Annonces> l2= new ArrayList<Annonces>();
@@ -129,7 +120,14 @@ public class AnnoncesbackController implements Initializable {
     private Button Alert;
     @FXML
     private TextField Recherche_User;
+    @FXML
+    private ImageView myimageview;
     
+      Image image=new Image("/image/wassalni-removebg-preview.png");
+  
+     public void displayImage() {
+              myimageview.setImage(image);
+            }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -154,19 +152,9 @@ public class AnnoncesbackController implements Initializable {
       //  tv_liraison.setItems(ls.get(i));
      
        tv.setItems(ls);
-       tv.setItems(masterData);
+      
        
-       coltype.setCellValueFactory(new PropertyValueFactory<>("date_annonce"));
-        coldescription.setCellValueFactory(new PropertyValueFactory<>("destination_annonce"));
-        coldepart.setCellValueFactory(new PropertyValueFactory<>("depart_annonce"));
-        coldispo.setCellValueFactory(
-                new PropertyValueFactory<>("dispo_annonce"));
-        
-        colnum.setCellValueFactory(
-                new PropertyValueFactory<>("Num_tel"));
-   
-         System.out.println("hee"+ls);
-        
+      
         //for(int i = 0 ; i < tv.getItems().size() ; i++){
          //   System.out.println("person " + tv.getItems().get(i).getDestination_annonce());
        // }
@@ -179,29 +167,54 @@ public class AnnoncesbackController implements Initializable {
     }
         
         
-        
-        
+      
         
        
 
    
 
-    @FXML
     private void deleteannonces(ActionEvent event) {
         
-         Annonces selectedItem = tv.getSelectionModel().getSelectedItem();
-        if(selectedItem!=null){
+        // Annonces selectedItem = tv.getSelectionModel().getSelectedItem();
+        //if(selectedItem!=null){
        //Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         //alert.setTitle("Confirmation Dialog");
         //alert.setContentText("Etes vous sure de supprimer cette element ?");   
        // Optional<ButtonType> result = alert.showAndWait();
        // if (result.get() == ButtonType.OK){
-        ServiceAnnonce ps = new ServiceAnnonce(); 
+         
+        
+       
+       Annonces selectedItem = tv.getSelectionModel().getSelectedItem();
+        if(selectedItem!=null){
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setContentText("Etes vous sure de supprimer cette element ?");   
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+        ServiceAnnonce ps = new ServiceAnnonce() ; 
         tv.getItems().remove(selectedItem);
         ps.supprimer(selectedItem);
         }
         
         }
+        else {
+        
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez sélectionner un element à supprimer.");
+
+        alert.showAndWait();
+        }
+       
+       
+       
+       
+    }
+       
+       
+        
        // else {
         
         //Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -217,7 +230,6 @@ public class AnnoncesbackController implements Initializable {
         
     //}
 
-    @FXML
     private void modifierannonces(ActionEvent event) {
        
        Annonces r=tv.getSelectionModel().getSelectedItem();
@@ -253,28 +265,27 @@ public class AnnoncesbackController implements Initializable {
       
     }
 
-    @FXML
     private void addannonce(ActionEvent event) {
         
-          if(txtdate.getText().isEmpty()||txtdestination.getText().isEmpty()||txtdepart.getText().isEmpty() ||txtdispo.getText().isEmpty()||txtnum.getText().isEmpty() )
+          if(txtdestination.getText().isEmpty()||txtdepart.getText().isEmpty() ||txtdispo.getText().isEmpty()||txtnum.getText().isEmpty() )
         {
             JOptionPane.showMessageDialog(null, "verifer les champs");  
         }
           
         else
         {
-        String Date = txtdate.getText();
+        Date datee=java.sql.Date.valueOf(txtdate.getValue());
         String Destination  = txtdestination.getText();
         String Depart = txtdepart.getText();
         String Dispo = txtdispo.getText();
         String Num = txtnum.getText();
         
          
-        Annonces c = new Annonces(txtdate.getText(), txtdestination.getText() ,  txtdepart.getText(), Integer.valueOf(txtdispo.getText()) , Integer.valueOf(txtnum.getText()));
+        Annonces c = new Annonces("20-05-2022", txtdestination.getText() ,  txtdepart.getText(), Integer.valueOf(txtdispo.getText()) , Integer.valueOf(txtnum.getText()));
         ServiceAnnonce sc = new ServiceAnnonce();
         sc.ajouter(c);
                     JOptionPane.showMessageDialog(null, "ajout avec succes");
-        txtdate.clear();
+        
         txtdestination.clear();
         txtdepart.clear();
         txtdispo.clear();
@@ -286,17 +297,48 @@ public class AnnoncesbackController implements Initializable {
            
         ls.addAll(sl.afficher());
          tv.setItems(ls);
+           JOptionPane.showMessageDialog(null, "Affichage avec succes");
        
-       
-         JOptionPane.showMessageDialog(null, "affichage avec succes");
-     
+       FilteredList<Annonces> filteredData = new FilteredList<>(ls, b -> true);
+
+        Recherche_User.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(an -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (an.getDestination_annonce().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches first name.
+                } else if (an.getDepart_annonce().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+                 else {
+                    return false; // Does not match.
+                }
+            });
+        });
+        SortedList<Annonces> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(tv.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tv.setItems(sortedData);
+    }
+        
          }
         
         
         
         
         
-    }
+    
 
     
     
@@ -320,6 +362,18 @@ public class AnnoncesbackController implements Initializable {
         stage.show();
         
     }
+
+    private void stat(ActionEvent event) throws IOException {
+        
+        
+          Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/interfaces/Statann.fxml"));/* Exception */
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+}
     
     
    /*  public  ObservableList<Annonces> getUserList() {
@@ -391,36 +445,9 @@ public class AnnoncesbackController implements Initializable {
       
     
 
-    @FXML
-    private void searchRec(javafx.scene.input.KeyEvent event) {
+    
 
- 
-        FilteredList<Annonces> filterData = new FilteredList<>(masterData, p -> true);
-        Recherche_User.textProperty().addListener((obsevable, oldvalue, newvalue) -> {
-            filterData.setPredicate(pers -> {
 
-                if (newvalue == null || newvalue.isEmpty()) {
-                    return true;
-                }
-                String typedText = newvalue.toLowerCase();
-                if (pers.getDestination_annonce().toLowerCase().indexOf(typedText) != -1) {
-
-                    return true;
-                }
-                
-
-                return false;
-            });
-            SortedList<Annonces> sortedList = new SortedList<>(filterData);
-            sortedList.comparatorProperty().bind(tv.comparatorProperty());
-            tv.setItems(sortedList);
-             JOptionPane.showMessageDialog(null, "avec succes");
-     
-            });
-             
-    }
-
-}
 
        
        

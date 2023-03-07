@@ -94,32 +94,41 @@ public class AlertsService implements Iservice<Alerts>{
         return list;
     }*/
 
-    @Override
-    public int ajouter(Alerts a) {
-        int id=1;
-         try {
-        String sql = "insert into alerts(id,programme_id,destination,date,rapport,Num_tel,mail)"+"values(NULL,?,?,?,?,?,?)";
-        ste = cnx.prepareStatement(sql);
-        ste.setInt(1, a.getProgramme_id());
-        ste.setString(2, a.getDestination());
-        ste.setString(3,a.getDate());
-        ste.setString(4, a.getRapport());
-        ste.setInt(5, a.getNum_tel());
-        ste.setString(6, a.getMail());
-        ste.executeUpdate();
-             System.out.println("Alert ajoutée!");
-         }catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+  @Override
+public int ajouter(Alerts a) {
+    int id = 0; // initialize id to 0
+    try {
+        String sql = "INSERT INTO alerts (id_annonce, destination, date, rapport, num_tel, mail) "
+                   + "SELECT ?, destination_annonce, date_annonce, ?, Num_tel, ? "
+                   + "FROM annonce WHERE id_annonce = ?";
+        PreparedStatement ste = cnx.prepareStatement(sql);
+       
+        ste.setInt(1, a.getId_annonce());
+        ste.setString(2, a.getRapport());
+        ste.setString(3, a.getMail());
+        ste.setInt(4, a.getId_annonce()); // id_annonce for WHERE clause in SELECT statement
+        
+        int rowsInserted = ste.executeUpdate();
+        if (rowsInserted > 0) {
+            System.out.println("Alert ajoutée!");
+            // Get the generated id from the inserted row
+            ResultSet rs = ste.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
         }
-         return id;
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
+    return id;
+}
 
     @Override
     public void supprimer(Alerts a) {
-       String requete = "DELETE FROM alerts WHERE destination = ?";
+       String requete = "DELETE FROM alerts WHERE id_alerts = ?";
         try {
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(1, a.getId());
+            pst.setInt(1, a.getId_alerts());
             pst.executeUpdate();
         } catch (SQLException ex) {
              System.out.println(ex.getMessage());
@@ -128,26 +137,11 @@ public class AlertsService implements Iservice<Alerts>{
     }
     
     
-    @Override
-    public void modifier(Alerts a) {
-       
-         String req = "UPDATE alerts SET programme_id='"+a.getProgramme_id()+"',destination='"+a.getDestination()+"',date='"+a.getDate()+"',rapport="+a.getRapport()+", Num_tel="+a.getNum_tel()+", mail='"+a.getMail()+"' WHERE id="+a.getId() ;
-        try {
-            PreparedStatement st1 = cnx.prepareStatement(req);
-             
-             st1.executeUpdate();
-            System.out.println("Alerts modifié");
-
-        } catch (SQLException ex) {
-            System.out.println("Probléme");
-            System.out.println(ex.getMessage());
-
-        }
+   
         
         
         
-        
-    }
+    
 
     @Override
     public List<Alerts> afficher() {
@@ -161,14 +155,13 @@ public class AlertsService implements Iservice<Alerts>{
         
         while (rs.next()) {
            Alerts a = new Alerts();
-             a.setId(rs.getInt("id"));
-            a.setProgramme_id(rs.getInt("programme_id"));
+            a.setId_annonce(rs.getInt("id_annonce"));
             a.setDestination(rs.getString("destination"));
             a.setDate(rs.getString("date"));
             a.setRapport(rs.getString("rapport"));
             a.setNum_tel(rs.getInt("Num_tel"));
              a.setMail(rs.getString("mail"));
-            System.out.println(a.getId());
+           // System.out.println(a.getId());
             list.add(a);           
         }
     } catch (SQLException ex) {
@@ -179,6 +172,18 @@ public class AlertsService implements Iservice<Alerts>{
      
     
 }
+
+    
+    public List<Alerts> afficher_historique() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void modifier(Alerts a) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 
 
 

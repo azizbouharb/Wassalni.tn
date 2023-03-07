@@ -27,17 +27,44 @@ public class ServiceAnnonce   implements Iservice<Annonces> {
     }
     
 
+    
+    public int getNextRef() {
+    int ref = 0;
+    try {
+        // Retrieve the highest "ref" value from the "livraisons" table
+        String sql = "SELECT MAX(rRef_annonce) FROM annonce";
+       ste = cnx.prepareStatement(sql);
+        ResultSet rs = ste.executeQuery(sql);
+        if (rs.next()) {
+            ref = rs.getInt(1);
+        }
+        ref++; // increment the value by 1
+    } catch (SQLException ex) {
+        System.out.println(ex);
+    }
+    return ref;
+}
+    
+    
+    
+    
+    
+    
+    
     @Override
     public int ajouter(Annonces a) {
         int id=-1;
          try {
-        String sql = "insert into annonce(id_annonce,date_annonce,destination_annonce,depart_annonce,dispo_annonce,Num_tel)"+"values(NULL,?,?,?,?,?)";
+        String sql = "insert into annonce(id_annonce,date_annonce,destination_annonce,depart_annonce,dispo_annonce,Num_tel,Ref_annonce,id_chauff,Image_name)"+"values(NULL,?,?,?,?,?,?,?,?)";
         ste = cnx.prepareStatement(sql);
         ste.setString(1, a.getDate_annonce());
         ste.setString(2, a.getDestination_annonce());
         ste.setString(3, a.getDepart_annonce());
         ste.setInt(4, a.getDispo_annonce());
         ste.setInt(5, a.getNum_tel());
+        ste.setInt(6, a.getRef_annonce());
+        ste.setInt(7, a.getId_chauff());
+         ste.setString(8, a.getImage_name());
         ste.executeUpdate();
              System.out.println("Annonce ajoutée!");
          }catch (SQLException ex) {
@@ -66,7 +93,7 @@ public class ServiceAnnonce   implements Iservice<Annonces> {
     @Override
     public void modifier(Annonces a) {
         
-        String req = "UPDATE annonce SET date_annonce='"+a.getDate_annonce()+"',destination_annonce='"+a.getDestination_annonce()+"',depart_annonce='"+a.getDepart_annonce()+"',dispo_annonce='"+a.getDispo_annonce()+"',Num_tel='"+a.getNum_tel()+"'WHERE id="+a.getId_annonce();
+        String req = "UPDATE annonce SET date_annonce='"+a.getDate_annonce()+"',destination_annonce='"+a.getDestination_annonce()+"',depart_annonce='"+a.getDepart_annonce()+"',dispo_annonce='"+a.getDispo_annonce()+"'WHERE id_annonce="+a.getId_annonce();
         try {
             PreparedStatement st1 = cnx.prepareStatement(req);
              
@@ -90,37 +117,81 @@ public class ServiceAnnonce   implements Iservice<Annonces> {
       
 
     @Override
-    public List<Annonces> afficher() {
-      
-        
-        
-          List<Annonces> list = new ArrayList<>();
-      
+public List<Annonces> afficher() {
+    List<Annonces> list = new ArrayList<>();
     try {
         String requete = "SELECT * FROM annonce ORDER BY destination_annonce";
-       PreparedStatement st1 = cnx.prepareStatement(requete);
+        PreparedStatement st1 = cnx.prepareStatement(requete);
         ResultSet rs = st1.executeQuery(requete);
-        
+
         while (rs.next()) {
-           Annonces a = new Annonces();
+            Annonces a = new Annonces();
             a.setDate_annonce(rs.getString("date_annonce"));
             a.setDestination_annonce(rs.getString("destination_annonce"));
             a.setDepart_annonce(rs.getString("depart_annonce"));
             a.setDispo_annonce(rs.getInt("dispo_annonce"));
             a.setNum_tel(rs.getInt("Num_tel"));
-            System.out.println(a.getId_annonce());
-            list.add(a);           
+            a.setRef_annonce(rs.getInt("Ref_annonce"));
+            a.setId_annonce(rs.getInt("id_annonce"));
+             a.setImage_name(rs.getString("Image_name"));
+            list.add(a);
         }
     } catch (SQLException ex) {
         System.err.println(ex.getMessage());
     }
-        return list;
-       
-        
-        
-        
-  
+    return list;
+}
+
+
+    public List<Annonces> afficher_historique(int id_chauff) {
+    List<Annonces> list = new ArrayList<>();
+    try {
+        String requete = "SELECT * FROM annonce WHERE id_chauff = ?";
+        PreparedStatement st1 = cnx.prepareStatement(requete);
+        st1.setInt(1, id_chauff);
+        ResultSet rs = st1.executeQuery();
+        while (rs.next()) {
+            Annonces a = new Annonces();
+            a.setDate_annonce(rs.getString("date_annonce"));
+            a.setDestination_annonce(rs.getString("destination_annonce"));
+            a.setDepart_annonce(rs.getString("depart_annonce"));
+            a.setDispo_annonce(rs.getInt("dispo_annonce"));
+            a.setNum_tel(rs.getInt("Num_tel"));
+            a.setId_annonce(rs.getInt("id_annonce"));
+            list.add(a);
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
     }
+    return list;
+}
+
+public List<Annonces> getAll() {
+    List<Annonces> list = new ArrayList<>();
+    try {
+        String requete = "SELECT * FROM annonce";
+        PreparedStatement st1 = cnx.prepareStatement(requete);
+        ResultSet rs = st1.executeQuery(requete);
+
+        while (rs.next()) {
+            Annonces a = new Annonces();
+            a.setDate_annonce(rs.getString("date_annonce"));
+            a.setDestination_annonce(rs.getString("destination_annonce"));
+            a.setDepart_annonce(rs.getString("depart_annonce"));
+            a.setDispo_annonce(rs.getInt("dispo_annonce"));
+            a.setNum_tel(rs.getInt("Num_tel"));
+            a.setRef_annonce(rs.getInt("Ref_annonce"));
+            a.setId_annonce(rs.getInt("id_annonce"));
+            list.add(a);
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+    return list;
+}
+
+   
+
         
    
     

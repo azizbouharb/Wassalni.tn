@@ -22,6 +22,10 @@ public interface Iservice< A> {
    
     public void supprimer(A a);//cat ph
     public void modifier(A a);//ph
-    public List<A> afficher();//cat ph
+    public List<A> afficher();
+    
+    
+//cat ph
+    
 }
 

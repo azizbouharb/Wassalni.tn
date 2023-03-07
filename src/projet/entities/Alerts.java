@@ -14,8 +14,8 @@ import java.sql.Date;
  */
 public class Alerts {
        
-    private int id;
-    private int programme_id;
+    private int id_alerts;
+    private int id_annonce;
     private String Destination;
     private String date;
     private String rapport;
@@ -24,39 +24,37 @@ public class Alerts {
                     
     public Alerts(){}
 
-    public Alerts(int id, String Destination, String date, String rapport, int Num_tel, String mail) 
-    {
-        this.id = id;
-        this.Destination = Destination;
-        this.date = date;
-        this.rapport = rapport;
-        this.Num_tel = Num_tel;
-        this.mail = mail;
-    }
-    public Alerts(int id,int programme_id, String Destination, String date, String rapport, int Num_tel, String mail) 
-    {
-        this.id = id;
-        this.programme_id = programme_id;
-        this.Destination= Destination;
-        this.date = date;
-        this.rapport = rapport;
-        this.Num_tel = Num_tel;
-        this.mail = mail;
-    }
-    public int getId() {
-        return id;
+    public Alerts(int id_alerts) {
+        this.id_alerts = id_alerts;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-    public int getProgramme_id() {
-        return programme_id;
+   
+
+    public Alerts(int id_annonce, String rapport, String mail) {
+        this.id_annonce = id_annonce;
+        this.rapport = rapport;
+        this.mail = mail;
     }
 
-    public void setProgramme_id(int programme_id) {
-        this.programme_id = programme_id;
+    
+
+    public int getId_alerts() {
+        return id_alerts;
     }
+
+    public void setId_alerts(int id_alerts) {
+        this.id_alerts = id_alerts;
+    }
+
+    public int getId_annonce() {
+        return id_annonce;
+    }
+
+    public void setId_annonce(int id_annonce) {
+        this.id_annonce = id_annonce;
+    }
+
+    
 
     public String getDestination() {
         return Destination;
@@ -104,9 +102,10 @@ public class Alerts {
 
     @Override
     public String toString() {
-        return "Alerts{" + "id=" + id + ", programme_id=" + programme_id + ", Destination=" + Destination + ", date=" + date + ", rapport=" + rapport + ", Num_tel=" + Num_tel + ", mail=" + mail + '}';
+        return "Alerts{" + "id_alerts=" + id_alerts + ", id_annonce=" + id_annonce + ", Destination=" + Destination + ", date=" + date + ", rapport=" + rapport + ", Num_tel=" + Num_tel + ", mail=" + mail + '}';
     }
 
+    
     
  
 

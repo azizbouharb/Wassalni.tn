@@ -23,9 +23,21 @@ public class Annonces {
     private String depart_annonce;
     private int dispo_annonce;
     private int Num_tel;
+    private int Ref_annonce;
+    private int id_chauff;
+    private String Image_name;
     
     public Annonces(){
     }
+
+    public Annonces(int id_annonce, String date_annonce, String destination_annonce, String depart_annonce, int dispo_annonce) {
+        this.id_annonce = id_annonce;
+        this.date_annonce = date_annonce;
+        this.destination_annonce = destination_annonce;
+        this.depart_annonce = depart_annonce;
+        this.dispo_annonce = dispo_annonce;
+    }
+    
 
     public Annonces(int id_annonce, String date_annonce, String destination_annonce, String depart_annonce, int dispo_annonce, int Num_tel) {
         this.id_annonce = id_annonce;
@@ -44,9 +56,69 @@ public class Annonces {
         this.Num_tel = Num_tel;
     }
 
-    public Annonces(int i, String type, String description, String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Annonces(String date_annonce, String destination_annonce, String depart_annonce, int dispo_annonce, int Num_tel, int id_chauff) {
+        this.date_annonce = date_annonce;
+        this.destination_annonce = destination_annonce;
+        this.depart_annonce = depart_annonce;
+        this.dispo_annonce = dispo_annonce;
+        this.Num_tel = Num_tel;
+        this.id_chauff = id_chauff;
     }
+
+    public Annonces(String date_annonce, String destination_annonce, String depart_annonce, int dispo_annonce, int Num_tel, String Image_name) {
+        this.date_annonce = date_annonce;
+        this.destination_annonce = destination_annonce;
+        this.depart_annonce = depart_annonce;
+        this.dispo_annonce = dispo_annonce;
+        this.Num_tel = Num_tel;
+        this.Image_name = Image_name;
+    }
+
+    public Annonces(String date_annonce, String depart_annonce, String destination_annonce, int dispo_annonce, int num_tel, int id_annonce, String image_name) {
+      this.date_annonce = date_annonce;
+        this.destination_annonce = destination_annonce;
+        this.depart_annonce = depart_annonce;
+        this.dispo_annonce = dispo_annonce;
+        this.Num_tel = num_tel;
+        this.id_annonce = id_annonce;
+        this.Image_name = image_name;
+    }
+    
+    
+    
+    
+    
+    
+    
+
+    public String getImage_name() {
+        return Image_name;
+    }
+
+    public void setImage_name(String Image_name) {
+        this.Image_name = Image_name;
+    }
+
+        
+    public int getId_chauff() {
+        return id_chauff;
+    }
+
+    public void setId_chauff(int id_chauff) {
+        this.id_chauff = id_chauff;
+    }
+
+   
+
+    public void setRef_annonce(int Ref_annonce) {
+        this.Ref_annonce = Ref_annonce;
+    }
+
+    public int getRef_annonce() {
+        return Ref_annonce;
+    }
+    
+    
 
     public int getId_annonce() {
         return id_annonce;
@@ -98,12 +170,13 @@ public class Annonces {
 
     @Override
     public String toString() {
-        return "Annonces{" + "id_annonce=" + id_annonce + ", date_annonce=" + date_annonce + ", destination_annonce=" + destination_annonce + ", depart_annonce=" + depart_annonce + ", dispo_annonce=" + dispo_annonce + ", Num_tel=" + Num_tel + '}';
+        return "Annonces{" + "id_annonce=" + id_annonce + ", date_annonce=" + date_annonce + ", destination_annonce=" + destination_annonce + ", depart_annonce=" + depart_annonce + ", dispo_annonce=" + dispo_annonce + ", Num_tel=" + Num_tel + ", Ref_annonce=" + Ref_annonce + ", id_chauff=" + id_chauff + ", Image_name=" + Image_name + '}';
     }
 
-    public void setContentText(String etes_vous_sure_de_supprimer_cette_element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
+
+   
+
 
     
 
